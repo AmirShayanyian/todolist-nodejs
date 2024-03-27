@@ -2,16 +2,18 @@ const express = require('express');
 const mongo = require('../config/mongoose.config');
 const notFound = require('./middlewares/not-found.handler');
 const errorHandler = require('./middlewares/global-error.handler');
+const compression = require('compression');
 const { IndexRoute } = require('./routes/index.router');
 require('dotenv').config();
 const dataBaseUrl = process.env.MONGO_URL;
 
 const app = express();
 mongo(dataBaseUrl);
+app.use(compression());
 app.use(IndexRoute);
 app.get('/', (req, res, next) => {
   try {
-    sad;
+    
     return res.json({
       message: 'Welcome to our website.',
     });
