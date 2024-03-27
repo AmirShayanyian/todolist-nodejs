@@ -9,11 +9,12 @@ const dataBaseUrl = process.env.MONGO_URL;
 
 const app = express();
 mongo(dataBaseUrl);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(IndexRoute);
 app.get('/', (req, res, next) => {
   try {
-    
     return res.json({
       message: 'Welcome to our website.',
     });

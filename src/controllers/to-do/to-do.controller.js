@@ -1,9 +1,26 @@
+const ToDoService = require('../../services/todo/todo.service');
+const autoBind = require('auto-bind');
 class ToDoController {
-  #model;
+  #service;
   constructor() {
-    // this.#model = ?
+    this.#service = new ToDoService();
+    autoBind(this)
   }
-  static async createTodo(req, res, next) {}
+  async createTodo(req, res, next) {
+    try {
+      const { name, description, isDone } = req.body;
+      const result = await this.#service.createTodo({
+        name,
+        description,
+        isDone,
+      });
+      if (result) {
+        return res.json(result);
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
   static async getAllTodo(req, res, next) {}
   static async getTodoById(req, res, next) {
     res.json({
