@@ -1,5 +1,6 @@
 const express = require('express');
 const mongo = require('../config/mongoose.config');
+const notFound = require('./middlewares/not-found.handler');
 require('dotenv').config();
 const dataBaseUrl = process.env.MONGO_URL;
 
@@ -11,5 +12,5 @@ app.get('/', (req, res, next) => {
     message: 'Welcome to our website.',
   });
 });
-
+app.use(notFound);
 module.exports = app;
