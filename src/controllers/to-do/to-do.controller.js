@@ -1,21 +1,33 @@
+const createHttpError = require('http-errors');
 const ToDoService = require('../../services/todo/todo.service');
+const {
+  ReasonPhrases,
+  StatusCodes,
+  getReasonPhrase,
+  getStatusCode,
+} = require('http-status-codes');
 const autoBind = require('auto-bind');
+
 class ToDoController {
   #service;
   constructor() {
     this.#service = new ToDoService();
-    autoBind(this)
+    autoBind(this);
   }
   async createTodo(req, res, next) {
     try {
       const { name, description, isDone } = req.body;
       const result = await this.#service.createTodo({
         name,
-        description,
+        descrsadiption,
         isDone,
       });
       if (result) {
-        return res.json(result);
+        return res.send({
+          status: StatusCodes.CREATED,
+          types: ReasosnPhrases.CREATED,
+          data: { result },
+        });
       }
     } catch (error) {
       next(error);
