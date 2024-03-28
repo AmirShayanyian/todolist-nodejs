@@ -26,7 +26,7 @@ class ToDoController {
         return res.send({
           status: StatusCodes.CREATED,
           types: ReasonPhrases.CREATED,
-          data: { result },
+          data: result,
         });
       }
     } catch (error) {

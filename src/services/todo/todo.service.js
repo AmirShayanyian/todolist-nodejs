@@ -1,5 +1,4 @@
 const toDoModel = require('../../models/to-do/toDo.model');
-const mongoose = require('mongoose');
 class ToDoService {
   #model;
   constructor() {
@@ -17,7 +16,7 @@ class ToDoService {
   }
   async getTodoById(id) {
     const todo = await this.#model.findOne({
-      _id:new  mongoose.Types.ObjectId(id),
+      _id: id,
     });
     return todo;
   }
