@@ -20,5 +20,11 @@ class ToDoService {
     });
     return todo;
   }
+  async getTodoByName(name) {
+    const todo = await this.#model.findOne({
+      name,
+    });
+    return todo;
+  }
 }
 module.exports = ToDoService;

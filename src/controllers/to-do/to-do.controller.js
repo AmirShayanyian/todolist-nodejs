@@ -58,7 +58,19 @@ class ToDoController {
       next(error);
     }
   }
-  async getTodoByName(req, res, next) {}
+  async getTodoByName(req, res, next) {
+    try {
+      const name = req.query.name;
+      const todo = await this.#service.getTodoByName(name);
+      return res.send({
+        status: StatusCodes.OK,
+        type: ReasonPhrases.OK,
+        data: todo,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
   async updateTodo(req, res, next) {}
   async deleteTodo(req, res, next) {}
 }
