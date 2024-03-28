@@ -71,7 +71,24 @@ class ToDoController {
       next(error);
     }
   }
-  async updateTodo(req, res, next) {}
+  async updateTodo(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { name, description, isDone } = req.body;
+      const todo = await this.#service.updateTodo(id, {
+        name,
+        description,
+        isDone,
+      });
+      return res.send({
+        status: StatusCodes.OK,
+        type: ReasonPhrases.OK,
+        data: todo,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
   async deleteTodo(req, res, next) {}
 }
 module.exports = ToDoController;

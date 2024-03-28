@@ -10,7 +10,7 @@ class ToDoService {
   }
   async getAllTodo() {
     const models = await this.#model.aggregate([
-      { $project: { _id: 0, createdAt: 0, updatedAt: 0, __v: 0 } },
+      { $project: { createdAt: 0, updatedAt: 0, __v: 0 } },
     ]);
     return models;
   }
@@ -25,6 +25,17 @@ class ToDoService {
       name,
     });
     return todo;
+  }
+  async updateTodo(id, payload) {
+    try {
+      // const todo = await this.#model.findById(id);
+      // console.log('Old todo :', todo);
+      const updatedTodo = await this.#model.updateOne({ _id: id }, payload);
+      // console.log('New todo :', todo);
+      return updatedTodo;
+    } catch (err) {
+      console.log('err: ', err);
+    }
   }
 }
 module.exports = ToDoService;
