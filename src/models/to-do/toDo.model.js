@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const toDoSchema = new Schema(
   {
+    id: { type: Number, required: true, unique: true },
     name: { type: String, required: true, unique: true },
     description: {
       type: String,

@@ -34,21 +34,32 @@ class ToDoController {
     }
   }
   async getAllTodo(req, res, next) {
-    const todos = await this.#service.getAllTodo();
-    return res.send({
-      status: StatusCodes.OK,
-      type: ReasonPhrases.OK,
-      data: todos,
-    });
+    try {
+      const todos = await this.#service.getAllTodo();
+      return res.send({
+        status: StatusCodes.OK,
+        type: ReasonPhrases.OK,
+        data: todos,
+      });
+    } catch (error) {
+      next(error);
+    }
   }
-  static async getTodoById(req, res, next) {
-    res.json({
-      id: req.params.id,
-      message: 'hiiiiiiiiiiiiiiiiiiiiii',
-    });
+  async getTodoById(req, res, next) {
+    try {
+      const id = req.params.id;
+      const todo = await this.#service.getTodoById(id);
+      return res.send({
+        status: StatusCodes.OK,
+        type: ReasonPhrases.OK,
+        data: todo,
+      });
+    } catch (error) {
+      next(error);
+    }
   }
-  static async getTodoByName(req, res, next) {}
-  static async updateTodo(req, res, next) {}
-  static async deleteTodo(req, res, next) {}
+  async getTodoByName(req, res, next) {}
+  async updateTodo(req, res, next) {}
+  async deleteTodo(req, res, next) {}
 }
 module.exports = ToDoController;
