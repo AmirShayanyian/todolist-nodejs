@@ -4,9 +4,9 @@ const todoController = new ToDoController();
 const router = Router();
 
 router.post('/', todoController.createTodo);
-router.get('/:id', ToDoController.getTodoById);
+// router.get('/:id', todoController.getTodoById);
 router.get('/:name', ToDoController.getTodoByName);
-router.get('/', ToDoController.getAllTodo);
+router.get('/', todoController.getAllTodo);
 router.patch('/:id', ToDoController.updateTodo);
 router.delete('/:id', ToDoController.deleteTodo);
 

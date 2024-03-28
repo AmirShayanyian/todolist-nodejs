@@ -19,13 +19,13 @@ class ToDoController {
       const { name, description, isDone } = req.body;
       const result = await this.#service.createTodo({
         name,
-        descrsadiption,
+        description,
         isDone,
       });
       if (result) {
         return res.send({
           status: StatusCodes.CREATED,
-          types: ReasosnPhrases.CREATED,
+          types: ReasonPhrases.CREATED,
           data: { result },
         });
       }
@@ -33,7 +33,14 @@ class ToDoController {
       next(error);
     }
   }
-  static async getAllTodo(req, res, next) {}
+  async getAllTodo(req, res, next) {
+    const todos = await this.#service.getAllTodo();
+    return res.send({
+      status: StatusCodes.OK,
+      type: ReasonPhrases.OK,
+      data: todos,
+    });
+  }
   static async getTodoById(req, res, next) {
     res.json({
       id: req.params.id,
