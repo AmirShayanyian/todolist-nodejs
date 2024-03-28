@@ -89,6 +89,18 @@ class ToDoController {
       next(error);
     }
   }
-  async deleteTodo(req, res, next) {}
+  async deleteTodo(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await this.#service.deleteTodo(id);
+      return res.send({
+        status: StatusCodes.OK,
+        type: ReasonPhrases.OK,
+        data: result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = ToDoController;

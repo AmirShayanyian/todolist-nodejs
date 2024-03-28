@@ -28,11 +28,16 @@ class ToDoService {
   }
   async updateTodo(id, payload) {
     try {
-      // const todo = await this.#model.findById(id);
-      // console.log('Old todo :', todo);
       const updatedTodo = await this.#model.updateOne({ _id: id }, payload);
-      // console.log('New todo :', todo);
       return updatedTodo;
+    } catch (err) {
+      console.log('err: ', err);
+    }
+  }
+  async deleteTodo(id) {
+    try {
+      const deletedTodo = await this.#model.deleteOne({ _id: id });
+      return deletedTodo;
     } catch (err) {
       console.log('err: ', err);
     }
