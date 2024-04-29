@@ -1,11 +1,6 @@
 const createHttpError = require('http-errors');
 const ToDoService = require('../../services/todo/todo.service');
-const {
-  ReasonPhrases,
-  StatusCodes,
-  getReasonPhrase,
-  getStatusCode,
-} = require('http-status-codes');
+const { ReasonPhrases, StatusCodes } = require('http-status-codes');
 const autoBind = require('auto-bind');
 
 class ToDoController {
