@@ -1,0 +1,17 @@
+tags:
+  - name: index
+    description: Index Routes
+  - name: user
+    description: User Routes
+  - name: To Do
+    description: To Do Routes
+paths:
+  /:
+    get:
+      tags:
+        - index
+      summary: Index route
+      description: get the index page
+      responses:
+        200:
+          description: success
