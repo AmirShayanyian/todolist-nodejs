@@ -1,17 +1,39 @@
 tags:
   - name: index
-    description: Index Routes
+    description: Index routes
   - name: user
-    description: User Routes
-  - name: To Do
-    description: To Do Routes
+    description: User routes
+  - name: to do
+    description: To do routes
 paths:
-  /:
-    get:
+  /todo/create:
+    post:
       tags:
-        - index
-      summary: Index route
-      description: get the index page
+        - to do
+      summary: Creates a to do
+      description: Creates a to dby giving parameters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/todo'
       responses:
         200:
-          description: success
+          description: Successful operation
+        
+
+components:
+  schemas:
+    todo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the To Do
+          example: house cleaning
+        description:
+          type: string
+          description: The whole description of the To do
+          example: mob the floors of upstairs
+        isDone:
+          type: boolean
